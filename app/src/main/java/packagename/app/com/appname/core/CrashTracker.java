@@ -12,10 +12,10 @@ import net.hockeyapp.android.UpdateManager;
 import packagename.app.com.appname.BuildConfig;
 import packagename.app.com.appname.R;
 
-public class CrashTrackerLogger implements Application.ActivityLifecycleCallbacks {
+public class CrashTracker implements Application.ActivityLifecycleCallbacks {
    private final Application application;
 
-   public CrashTrackerLogger(Application inApplication) {
+   public CrashTracker(Application inApplication) {
       this.application = inApplication;
    }
 

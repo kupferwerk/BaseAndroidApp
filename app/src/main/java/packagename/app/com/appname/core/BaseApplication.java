@@ -11,7 +11,7 @@ public class BaseApplication extends Application {
    }
 
    private void initCrashTracker() {
-      CrashTrackerLogger crashLogger = new CrashTrackerLogger(this);
+      CrashTracker crashLogger = new CrashTracker(this);
       crashLogger.init();
       registerActivityLifecycleCallbacks(crashLogger);
    }
