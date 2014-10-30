@@ -7,5 +7,12 @@ public class BaseApplication extends Application {
    @Override
    public void onCreate() {
       super.onCreate();
+      initCrashTracker();
+   }
+
+   private void initCrashTracker() {
+      CrashTrackerLogger crashLogger = new CrashTrackerLogger(this);
+      crashLogger.init();
+      registerActivityLifecycleCallbacks(crashLogger);
    }
 }
