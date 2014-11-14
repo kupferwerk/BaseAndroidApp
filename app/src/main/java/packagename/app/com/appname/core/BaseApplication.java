@@ -5,14 +5,9 @@ import android.app.Application;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import packagename.app.com.appname.core.module.ApplicationModule;
 
 public class BaseApplication extends Application {
-
-   @Inject
-   CrashTracker crashTracker;
 
    @Override
    public void onCreate() {

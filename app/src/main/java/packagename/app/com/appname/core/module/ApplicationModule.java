@@ -1,7 +1,5 @@
 package packagename.app.com.appname.core.module;
 
-import android.content.Context;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
