@@ -6,7 +6,6 @@ public final class Injector {
    static ObjectGraph objectGraph = null;
 
    public static void init(final Object rootModule) {
-
       if (objectGraph == null) {
          objectGraph = ObjectGraph.create(rootModule);
       } else {

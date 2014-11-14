@@ -61,6 +61,7 @@ task checkstyleReport(dependsOn: 'checkstyle') << {
 }
 
 dependencies {
+   provided 'com.squareup.dagger:dagger-compiler:1.2.2'
    compile 'com.android.support:appcompat-v7:21.0.0'
    compile 'net.hockeyapp.android:HockeySDK:3.5.0-b.4'
    compile 'com.squareup.okhttp:okhttp:2.1.0'
@@ -69,7 +70,6 @@ dependencies {
    compile 'de.greenrobot:eventbus:2.4.0'
    compile 'com.squareup.picasso:picasso:2.4.0'
    compile 'com.squareup.dagger:dagger:1.2.2'
-   provided 'com.squareup.dagger:dagger-compiler:1.2.2'
    compile 'com.jakewharton:butterknife:6.0.0'
    androidTestCompile 'org.mockito:mockito-core:1.9.5'
    androidTestCompile 'com.google.dexmaker:dexmaker:1.0'

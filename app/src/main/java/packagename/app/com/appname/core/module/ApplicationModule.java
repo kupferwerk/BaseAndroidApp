@@ -11,7 +11,7 @@ import dagger.Provides;
 import packagename.app.com.appname.core.BaseApplication;
 import packagename.app.com.appname.core.CrashTracker;
 
-@Module (injects = {BaseApplication.class, Picasso.class})
+@Module (injects = {BaseApplication.class})
 public class ApplicationModule {
    private BaseApplication app;
 
