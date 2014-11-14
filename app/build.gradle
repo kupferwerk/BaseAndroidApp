@@ -1,79 +1,78 @@
 apply plugin: 'com.android.application'
 apply plugin: 'checkstyle'
-apply from: 'https://raw.githubusercontent.com/jleidgens/gradleVersionName/master/versionName.gradle'
 
 android {
 
-    lintOptions {
-        abortOnError false
-        disable 'ContentDescription'
-    }
+   lintOptions {
+      abortOnError false
+      disable 'ContentDescription'
+   }
 
-    compileSdkVersion 21
-    buildToolsVersion "21.0.2"
+   compileSdkVersion 21
+   buildToolsVersion "21.1.0"
 
-    def versionMajor = 0
-    def versionMinor = 0
-    def versionPatch = 0
-    def versionDay = Calendar.instance.get(Calendar.DAY_OF_MONTH) +
-            ((Calendar.instance.get(Calendar.MONTH) + 1) * 100)
+   def versionMajor = 0
+   def versionMinor = 0
+   def versionPatch = 0
+   def versionDay = Calendar.instance.get(Calendar.DAY_OF_MONTH) +
+         ((Calendar.instance.get(Calendar.MONTH) + 1) * 100)
 
-    defaultConfig {
-        applicationId "packagename.app.com.appname"
-        minSdkVersion 15
-        targetSdkVersion 21
-        versionCode getVersionCode(versionMajor, versionMinor, versionPatch, versionDay)
-        versionName getVersionName(versionMajor, versionMinor, versionPatch, versionDay)
-        testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
-    }
+   defaultConfig {
+      applicationId "packagename.app.com.appname"
+      minSdkVersion 15
+      targetSdkVersion 21
+      versionCode System.getenv("BUILD_NUMBER") as Integer ?: 0
+      versionName System.getenv("BUILD_NUMBER") ?: "IDE"
+      testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
+   }
 
-    buildTypes {
-        release {
-            runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        debug {
-            applicationIdSuffix ".debug"
-            testCoverageEnabled true
-        }
-    }
+   buildTypes {
+      release {
+         runProguard false
+         proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      }
+      debug {
+         applicationIdSuffix ".debug"
+         testCoverageEnabled true
+      }
+   }
 }
 
 task checkstyle(type: Checkstyle) {
-    source 'src/'
-    include '**/*.java'
-    exclude '**/gen/**'
-    classpath = files()
-    reports {
-        xml {
-            destination "build/outputs/reports/checkstyle-results.xml"
-        }
-    }
+   source 'src/'
+   include '**/*.java'
+   exclude '**/gen/**'
+   classpath = files()
+   reports {
+      xml {
+         destination "build/outputs/reports/checkstyle-results.xml"
+      }
+   }
 }
 
 project.gradle.taskGraph.whenReady {
-    connectedAndroidTest {
-        ignoreFailures = true
-    }
+   connectedAndroidTest {
+      ignoreFailures = true
+   }
 }
 
 task checkstyleReport(dependsOn: 'checkstyle') << {
-    if (file("build/outputs/reports/checkstyle-results.xml").exists()) {
-        ant.xslt(in: "build/outputs/reports/checkstyle-results.xml",
-                style: "config/checkstyle/checkstyle.xsl",
-                out: "build/outputs/reports/checkstyle-results.html"
-        )
-    }
+   if (file("build/outputs/reports/checkstyle-results.xml").exists()) {
+      ant.xslt(in: "build/outputs/reports/checkstyle-results.xml",
+            style: "config/checkstyle/checkstyle.xsl",
+            out: "build/outputs/reports/checkstyle-results.html"
+      )
+   }
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:21.0.0'
-    compile 'net.hockeyapp.android:HockeySDK:3.5.0-b.4'
+   compile 'com.android.support:appcompat-v7:21.0.0'
+   compile 'net.hockeyapp.android:HockeySDK:3.5.0-b.4'
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
     compile 'com.squareup.retrofit:retrofit:1.6.1'
-    androidTestCompile 'org.mockito:mockito-core:1.9.5'
-    androidTestCompile 'com.google.dexmaker:dexmaker:1.0'
-    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.1'
+   androidTestCompile 'org.mockito:mockito-core:1.9.5'
+   androidTestCompile 'com.google.dexmaker:dexmaker:1.0'
+   androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.1'
     androidTestCompile 'com.jakewharton.espresso:espresso:1.1-r3'
 }
