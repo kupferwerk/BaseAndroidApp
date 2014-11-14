@@ -28,6 +28,7 @@ public class CrashTracker implements Application.ActivityLifecycleCallbacks {
                   return true;
                }
             });
+      application.registerActivityLifecycleCallbacks(this);
    }
 
    @Override
