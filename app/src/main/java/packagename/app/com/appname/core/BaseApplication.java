@@ -23,7 +23,6 @@ public class BaseApplication extends Application {
    public void onCreate() {
       super.onCreate();
       Injector.init(getModules(), this);
-      Injector.inject(this);
    }
 
    private List<Object> getModules() {
