@@ -10,6 +10,7 @@ public class SplashScreen extends Activity {
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
+      Injector.inject(this);
       setContentView(R.layout.splash_screen_activity);
    }
 }

@@ -10,8 +10,9 @@ import dagger.Module;
 import dagger.Provides;
 import packagename.app.com.appname.core.BaseApplication;
 import packagename.app.com.appname.core.CrashTracker;
+import packagename.app.com.appname.core.SplashScreen;
 
-@Module (injects = BaseApplication.class)
+@Module (injects = {BaseApplication.class, SplashScreen.class})
 public class ApplicationModule {
    private BaseApplication app;
 
