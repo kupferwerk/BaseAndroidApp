@@ -1,6 +1,8 @@
 package packagename.app.com.appname.core.module;
 
-import android.content.Context;
+import com.squareup.picasso.Picasso;
+
+import java.util.concurrent.Executors;
 
 import javax.inject.Singleton;
 
@@ -9,7 +11,7 @@ import dagger.Provides;
 import packagename.app.com.appname.core.BaseApplication;
 import packagename.app.com.appname.core.CrashTracker;
 
-@Module (injects = {BaseApplication.class})
+@Module (injects = BaseApplication.class)
 public class ApplicationModule {
    private BaseApplication app;
 
@@ -23,5 +25,13 @@ public class ApplicationModule {
       CrashTracker crashTracker = new CrashTracker(app);
       crashTracker.init();
       return crashTracker;
+   }
+
+   @Provides
+   @Singleton
+   public Picasso providePicasso() {
+      Picasso.Builder imageLoaderBuilder = new Picasso.Builder(app);
+      imageLoaderBuilder.executor(Executors.newSingleThreadExecutor());
+      return imageLoaderBuilder.build();
    }
 }
