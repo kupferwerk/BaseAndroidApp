@@ -4,9 +4,6 @@ import android.app.Application;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.Arrays;
-import java.util.List;
-
 import javax.inject.Inject;
 
 import packagename.app.com.appname.core.module.ApplicationModule;
@@ -22,10 +19,10 @@ public class BaseApplication extends Application {
    @Override
    public void onCreate() {
       super.onCreate();
-      Injector.init(getModules(), this);
+      Injector.init(getRootModule(), this);
    }
 
-   private List<Object> getModules() {
-      return Arrays.<Object>asList(new ApplicationModule(this));
+   private Object getRootModule() {
+      return new ApplicationModule(this);
    }
 }
