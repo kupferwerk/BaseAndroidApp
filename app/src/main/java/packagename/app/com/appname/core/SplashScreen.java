@@ -1,11 +1,17 @@
 package packagename.app.com.appname.core;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
 
 import packagename.app.com.appname.R;
 
-public class SplashScreen extends Activity {
+public class SplashScreen extends ActionBarActivity {
+
+   @Override
+   public boolean onCreateOptionsMenu(Menu menu) {
+      return super.onCreateOptionsMenu(menu);
+   }
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
