@@ -9,13 +9,15 @@ public class ApplicationTest extends ApplicationTestCase<BaseApplication> {
    }
 
    public void testCrashTracker() {
-      BaseApplication application = getApplication();
-      assertNotNull(application.crashTracker);
+      assertNotNull(getApplication().crashTracker);
    }
 
    public void testPicasso() throws Exception {
-      BaseApplication application = getApplication();
-      assertNotNull(application.picasso);
+      assertNotNull(getApplication().picasso);
+   }
+
+   public void testRestAdapter() throws Exception {
+      assertNotNull(getApplication().restAdapter);
    }
 
    @Override
