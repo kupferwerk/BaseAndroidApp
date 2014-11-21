@@ -1,0 +1,4 @@
+<resources>
+    <string name="base_url">@string/production_base_url</string>
+    <string name="production_base_url">http://production.baseurl.example.com</string>
+</resources>

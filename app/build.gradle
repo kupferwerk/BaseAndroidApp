@@ -65,7 +65,7 @@ dependencies {
    compile 'net.hockeyapp.android:HockeySDK:3.5.0-b.4'
    compile 'com.squareup.okhttp:okhttp:2.1.0'
    compile 'com.squareup.okhttp:okhttp-urlconnection:2.1.0'
-   compile 'com.squareup.retrofit:retrofit:1.7.1'
+   compile 'com.squareup.retrofit:retrofit:1.8.0'
    compile 'de.greenrobot:eventbus:2.4.0'
    compile 'com.squareup.picasso:picasso:2.4.0'
    compile 'com.squareup.dagger:dagger:1.2.2'
