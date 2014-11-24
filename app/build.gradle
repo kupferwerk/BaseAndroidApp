@@ -10,7 +10,7 @@ android {
    }
 
    compileSdkVersion 21
-   buildToolsVersion "21.1.0"
+   buildToolsVersion "21.1.1"
 
    defaultConfig {
       applicationId "packagename.app.com.appname"
@@ -23,7 +23,7 @@ android {
    buildTypes {
       release {
          runProguard false
-         proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+         proguardFiles 'proguard-rules.pro'
       }
       debug {
          applicationIdSuffix ".debug"

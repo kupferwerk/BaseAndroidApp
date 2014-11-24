@@ -18,11 +18,10 @@ import packagename.app.com.appname.BuildConfig;
 import packagename.app.com.appname.R;
 import packagename.app.com.appname.core.BaseApplication;
 import packagename.app.com.appname.core.CrashTracker;
-import packagename.app.com.appname.core.SplashScreen;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
 
-@Module (injects = {BaseApplication.class, SplashScreen.class})
+@Module (injects = {BaseApplication.class})
 public class ApplicationModule {
    public static final int CACHE_SIZE = 25 * 1024 * 1024;
    private BaseApplication app;
