@@ -48,7 +48,7 @@ public class CrashTracker implements Application.ActivityLifecycleCallbacks {
 
    @Override
    public void onActivityResumed(final Activity activity) {
-      if (BuildConfig.DEBUG) {
+      if (BuildConfig.DEBUG && !BuildConfig.IS_IDE_BUILD) {
          UpdateManager.register(activity, application.getString(R.string.hockey_app_id));
       }
       Tracking.startUsage(activity);

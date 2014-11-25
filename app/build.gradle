@@ -17,7 +17,13 @@ android {
       minSdkVersion 15
       targetSdkVersion 21
       versionCode System.getenv("BUILD_NUMBER") as Integer ?: 0
-      versionName System.getenv("BUILD_NUMBER") ?: "IDE"
+      String versionNameString = System.getenv("BUILD_NUMBER") ?: "IDE"
+      versionName versionNameString
+      if ("IDE".equals(versionNameString)) {
+         buildConfigField "boolean", "IS_IDE_BUILD", "true"
+      } else {
+         buildConfigField "boolean", "IS_IDE_BUILD", "false"
+      }
    }
 
    buildTypes {
