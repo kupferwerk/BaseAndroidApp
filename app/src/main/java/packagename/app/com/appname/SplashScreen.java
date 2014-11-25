@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import packagename.app.com.appname.core.BaseActivity;
 import packagename.app.com.appname.core.CrashTracker;
+import packagename.app.com.appname.core.Injector;
 import retrofit.RestAdapter;
 
 public class SplashScreen extends BaseActivity {
@@ -25,5 +26,6 @@ public class SplashScreen extends BaseActivity {
    protected void onCreate(Bundle savedInstanceState) {
       setContentView(R.layout.splash_screen_activity);
       super.onCreate(savedInstanceState);
+      Injector.inject(this);
    }
 }
