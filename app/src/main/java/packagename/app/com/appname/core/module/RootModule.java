@@ -6,8 +6,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import packagename.app.com.appname.SplashScreen;
 import packagename.app.com.appname.core.BaseApplication;
-import packagename.app.com.appname.core.SplashScreen;
 
 @Module (includes = {WebserviceModule.class, ApplicationModule.class},
       injects = {BaseApplication.class, SplashScreen.class})

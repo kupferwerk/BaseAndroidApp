@@ -1,14 +1,17 @@
-package packagename.app.com.appname.core;
+package packagename.app.com.appname;
 
 import android.test.ActivityInstrumentationTestCase2;
 
 import javax.inject.Inject;
 
+import packagename.app.com.appname.core.BaseApplication;
+import packagename.app.com.appname.core.TestInjector;
+
 public class SplashScreenTest extends ActivityInstrumentationTestCase2<SplashScreen> {
 
+   @Inject
+   BaseApplication application;
    private SplashScreen activity;
-
-   @Inject BaseApplication application;
 
    public SplashScreenTest() {
       super(SplashScreen.class);

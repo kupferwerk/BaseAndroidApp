@@ -7,7 +7,7 @@ import dagger.Provides;
 import packagename.app.com.appname.core.BaseApplication;
 import packagename.app.com.appname.core.CrashTracker;
 
-@Module(complete = false, library = true)
+@Module (complete = false, library = true)
 public class ApplicationModule {
 
    @Provides

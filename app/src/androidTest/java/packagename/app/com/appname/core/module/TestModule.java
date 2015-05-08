@@ -6,8 +6,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import packagename.app.com.appname.SplashScreenTest;
 import packagename.app.com.appname.core.BaseApplication;
-import packagename.app.com.appname.core.SplashScreenTest;
 
 @Module (
       includes = {RootModule.class},
