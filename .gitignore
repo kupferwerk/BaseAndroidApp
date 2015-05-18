@@ -4,6 +4,7 @@
 /.idea/libraries
 .DS_Store
 /build
+/doc/doxygen/output
 .idea
 app/build
 app.iml
