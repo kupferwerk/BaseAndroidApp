@@ -1,14 +1,12 @@
 package packagename.app.com.appname.core.module;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.concurrent.Executors;
 
 import javax.inject.Singleton;
@@ -51,17 +49,10 @@ public class WebserviceModule {
    }
 
    private OkHttpClient getHttpClient(Context context) {
-      File cacheDirectory = new File(context.getCacheDir().getAbsolutePath(), "HttpCache");
-      Cache cache = null;
-      try {
-         cache = new Cache(cacheDirectory, CACHE_SIZE);
-      } catch (IOException e) {
-         Log.e(getClass().getSimpleName(), "Could not create http cache", e);
-      }
-      OkHttpClient client = new OkHttpClient();
-      if (cache != null) {
-         client.setCache(cache);
-      }
+      final File cacheDirectory = new File(context.getCacheDir().getAbsolutePath(), "HttpCache");
+      final Cache cache = new Cache(cacheDirectory, CACHE_SIZE);
+      final OkHttpClient client = new OkHttpClient();
+      client.setCache(cache);
       return client;
    }
 }
