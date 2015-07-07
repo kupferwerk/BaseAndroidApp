@@ -10,10 +10,10 @@ import android.view.WindowManager;
 
 import packagename.app.com.appname.R;
 
-public class ColorStatusBar {
+public class AdjustStatusbar {
 
    @TargetApi (Build.VERSION_CODES.KITKAT)
-   public static void colorize(@NonNull Activity activity) {
+   public static void addColorAndHeight(@NonNull Activity activity) {
       if (!activity.getResources().getBoolean(R.bool.should_color_status_bar)) {
          return;
       }

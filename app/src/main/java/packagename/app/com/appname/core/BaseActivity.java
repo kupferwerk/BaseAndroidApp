@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
 
 import packagename.app.com.appname.R;
-import packagename.app.com.appname.core.activitiy.ColorStatusBar;
+import packagename.app.com.appname.core.activitiy.AdjustStatusbar;
 import packagename.app.com.appname.core.activitiy.behaviours.ActionBarBehavior;
 import packagename.app.com.appname.core.activitiy.behaviours.StandardToolBarBehavior;
 
@@ -34,7 +34,7 @@ public abstract class BaseActivity extends AppCompatActivity {
       if (behavior != null) {
          behavior.apply(this);
       }
-      ColorStatusBar.colorize(this);
+      AdjustStatusbar.addColorAndHeight(this);
    }
 
    @LayoutRes
