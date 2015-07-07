@@ -7,6 +7,7 @@ import android.os.Bundle;
 import net.hockeyapp.android.CrashManager;
 import net.hockeyapp.android.CrashManagerListener;
 import net.hockeyapp.android.Tracking;
+import net.hockeyapp.android.UpdateActivity;
 import net.hockeyapp.android.UpdateManager;
 
 import packagename.app.com.appname.BuildConfig;
@@ -48,21 +49,12 @@ public class CrashTracker implements Application.ActivityLifecycleCallbacks {
 
    @Override
    public void onActivityResumed(final Activity activity) {
-      if (BuildConfig.DEBUG && !BuildConfig.IS_IDE_BUILD) {
+      final boolean shouldShowUpdates = BuildConfig.DEBUG && !BuildConfig.IS_IDE_BUILD;
+      final boolean isUpdateActivity = !activity.getClass().equals(UpdateActivity.class);
+      if (shouldShowUpdates && isUpdateActivity) {
          UpdateManager.register(activity, application.getString(R.string.hockey_app_id));
       }
       Tracking.startUsage(activity);
-      //      View viewById = activity.findViewById(R.id.btn_feedback);
-      //      if (viewById != null) {
-      //         viewById.setOnClickListener(new View.OnClickListener() {
-      //            @Override
-      //            public void onClick(View v) {
-      //               FeedbackManager.register(activity, activity.getString(R.string
-      // .hockey_app_id), null);
-      //               FeedbackManager.showFeedbackActivity(activity);
-      //            }
-      //         });
-      //      }
    }
 
    @Override
