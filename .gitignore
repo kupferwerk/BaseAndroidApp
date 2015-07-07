@@ -9,3 +9,4 @@
 app/build
 app.iml
 BaseAndroidApp.iml
+*.iml
