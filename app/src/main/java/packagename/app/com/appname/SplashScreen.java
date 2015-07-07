@@ -6,12 +6,12 @@ import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
-import packagename.app.com.appname.core.BaseActivity;
+import packagename.app.com.appname.core.BaseActionBarActivity;
 import packagename.app.com.appname.core.CrashTracker;
 import packagename.app.com.appname.core.Injector;
 import retrofit.RestAdapter;
 
-public class SplashScreen extends BaseActivity {
+public class SplashScreen extends BaseActionBarActivity {
 
     @Inject
     Picasso picasso;

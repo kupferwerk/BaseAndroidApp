@@ -3,20 +3,21 @@ package packagename.app.com.appname.core;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.ViewGroup;
 
 import packagename.app.com.appname.R;
 import packagename.app.com.appname.core.activitiy.AdjustStatusbar;
-import packagename.app.com.appname.core.activitiy.behaviours.ActionBarBehavior;
-import packagename.app.com.appname.core.activitiy.behaviours.StandardToolBarBehavior;
 
-public abstract class BaseActivity extends AppCompatActivity {
+/**
+ * Extend this class if you have a standard action bar behaviour. You have to override
+ * getLayoutResourceId to benefit from this base activity. If you want to draw and handle the
+ * actionbar yourself for example with a coordinator layout do not extend this activity.
+ */
+public abstract class BaseActionBarActivity extends AppCompatActivity {
 
    private static final int INVALID_LAYOUT_ID = -1;
-
-   protected ActionBarBehavior getActionBarBehavior() {
-      return new StandardToolBarBehavior();
-   }
 
    @LayoutRes
    protected int getLayoutResourceId() {
@@ -29,12 +30,12 @@ public abstract class BaseActivity extends AppCompatActivity {
       final int layoutResourceId = getLayoutResourceId();
       if (layoutResourceId != INVALID_LAYOUT_ID) {
          initStandardView(layoutResourceId);
+         final View toolBarView = findViewById(R.id.toolbar);
+         if (toolBarView != null) {
+            setSupportActionBar((Toolbar) toolBarView);
+         }
+         AdjustStatusbar.addColorAndHeight(this);
       }
-      final ActionBarBehavior behavior = getActionBarBehavior();
-      if (behavior != null) {
-         behavior.apply(this);
-      }
-      AdjustStatusbar.addColorAndHeight(this);
    }
 
    @LayoutRes
