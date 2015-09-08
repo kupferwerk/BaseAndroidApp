@@ -7,13 +7,13 @@ android {
       exclude 'LICENSE.txt'
    }
 
-   compileSdkVersion 22
+   compileSdkVersion 23
    buildToolsVersion "22.0.1"
 
    defaultConfig {
       applicationId "packagename.app.com.appname"
       minSdkVersion 15
-      targetSdkVersion 22
+      targetSdkVersion 23
       versionCode System.getenv("BUILD_NUMBER") as Integer ?: 0
       String versionNameString = System.getenv("BUILD_NUMBER") ?: "IDE"
       versionName versionNameString
@@ -53,12 +53,6 @@ task checkstyle(type: Checkstyle) {
    }
 }
 
-project.gradle.taskGraph.whenReady {
-   connectedAndroidTestDebug {
-      ignoreFailures = true
-   }
-}
-
 task checkstyleReport(dependsOn: 'checkstyle') << {
    if (file("build/outputs/reports/checkstyle-results.xml").exists()) {
       ant.xslt(in: "build/outputs/reports/checkstyle-results.xml",
@@ -70,8 +64,8 @@ task checkstyleReport(dependsOn: 'checkstyle') << {
 
 dependencies {
    provided 'com.squareup.dagger:dagger-compiler:1.2.2'
-   compile 'com.android.support:appcompat-v7:22.2.0'
-   compile 'com.android.support:design:22.2.0'
+   compile 'com.android.support:appcompat-v7:23.0.0'
+   compile 'com.android.support:design:23.0.0'
    compile 'net.hockeyapp.android:HockeySDK:3.5.0'
    compile 'com.squareup.okhttp:okhttp:2.4.0'
    compile 'com.squareup.okhttp:okhttp-urlconnection:2.4.0'
