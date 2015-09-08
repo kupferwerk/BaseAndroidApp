@@ -12,7 +12,7 @@ android {
 
    defaultConfig {
       applicationId "packagename.app.com.appname"
-      minSdkVersion 15
+      minSdkVersion 16
       targetSdkVersion 23
       versionCode System.getenv("BUILD_NUMBER") as Integer ?: 0
       String versionNameString = System.getenv("BUILD_NUMBER") ?: "IDE"
