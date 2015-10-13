@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'checkstyle'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
 
@@ -8,7 +9,7 @@ android {
    }
 
    compileSdkVersion 23
-   buildToolsVersion "22.0.1"
+   buildToolsVersion "23.0.1"
 
    defaultConfig {
       applicationId "packagename.app.com.appname"
@@ -63,19 +64,20 @@ task checkstyleReport(dependsOn: 'checkstyle') << {
 }
 
 dependencies {
-   provided 'com.squareup.dagger:dagger-compiler:1.2.2'
+   compile 'com.google.dagger:dagger:2.0.1'
+   apt "com.google.dagger:dagger-compiler:2.0.1"
+   // Needed for @Generated annotation (missing in Java <= 1.6; therefore, Android)
+   compile 'javax.annotation:jsr250-api:1.0'
    compile 'com.android.support:appcompat-v7:23.0.1'
    compile 'com.android.support:design:23.0.1'
-   compile 'net.hockeyapp.android:HockeySDK:3.6.0-b.1'
-   compile 'com.squareup.okhttp:okhttp:2.5.0'
-   compile 'com.squareup.okhttp:okhttp-urlconnection:2.5.0'
-   compile 'com.squareup.retrofit:retrofit:1.9.0'
+   compile 'net.hockeyapp.android:HockeySDK:3.6.1'
+   compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
+   compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
    compile 'de.greenrobot:eventbus:2.4.0'
    compile 'com.squareup.picasso:picasso:2.5.2'
-   compile 'com.squareup.dagger:dagger:1.2.2'
    compile 'com.jakewharton:butterknife:7.0.1'
    compile 'io.reactivex:rxandroid:1.0.1'
-   androidTestCompile 'org.mockito:mockito-core:1.10.19'
+   androidTestCompile 'org.mockito:mockito-core:2.0.31-beta'
    androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
    androidTestCompile 'org.hamcrest:hamcrest-core:1.3'

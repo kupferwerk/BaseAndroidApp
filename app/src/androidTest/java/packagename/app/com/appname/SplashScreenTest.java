@@ -2,15 +2,8 @@ package packagename.app.com.appname;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-import javax.inject.Inject;
-
-import packagename.app.com.appname.core.BaseApplication;
-import packagename.app.com.appname.core.TestInjector;
-
 public class SplashScreenTest extends ActivityInstrumentationTestCase2<SplashScreen> {
 
-   @Inject
-   BaseApplication application;
    private SplashScreen activity;
 
    public SplashScreenTest() {
@@ -32,7 +25,6 @@ public class SplashScreenTest extends ActivityInstrumentationTestCase2<SplashScr
    @Override
    protected void setUp() throws Exception {
       super.setUp();
-      TestInjector.inject(getInstrumentation().getTargetContext(), this);
       activity = getActivity();
    }
 }

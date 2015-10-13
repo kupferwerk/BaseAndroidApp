@@ -14,7 +14,7 @@ public class WebserviceModuleTest extends AndroidTestCase {
    }
 
    public void testProvideRestAdapter() {
-      assertThat(webserviceModule.provideRestAdapter(getContext()), notNullValue());
+      assertThat(webserviceModule.provideRetrofit(getContext()), notNullValue());
    }
 
    @Override

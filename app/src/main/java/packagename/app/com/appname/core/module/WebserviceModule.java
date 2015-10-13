@@ -15,10 +15,11 @@ import dagger.Module;
 import dagger.Provides;
 import packagename.app.com.appname.BuildConfig;
 import packagename.app.com.appname.R;
-import retrofit.RestAdapter;
-import retrofit.client.OkClient;
+import packagename.app.com.appname.core.logging.LoggingInterceptor;
+import retrofit.GsonConverterFactory;
+import retrofit.Retrofit;
 
-@Module (complete = false, library = true)
+@Module
 public class WebserviceModule {
 
    public static final int CACHE_SIZE = 25 * 1024 * 1024;
@@ -35,16 +36,14 @@ public class WebserviceModule {
 
    @Provides
    @Singleton
-   RestAdapter provideRestAdapter(Context context) {
-      RestAdapter.Builder builder = new RestAdapter.Builder();
-      builder.setEndpoint(context.getString(R.string.base_url));
+   Retrofit provideRetrofit(Context context) {
+      Retrofit.Builder builder =
+            new Retrofit.Builder().baseUrl(context.getString(R.string.base_url))
+                  .addConverterFactory(GsonConverterFactory.create());
       if (BuildConfig.DEBUG) {
-         builder.setLogLevel(RestAdapter.LogLevel.FULL);
-      } else {
-         builder.setLogLevel(RestAdapter.LogLevel.NONE);
+         OkHttpClient client = new OkHttpClient();
+         client.interceptors().add(new LoggingInterceptor());
       }
-      OkHttpClient client = getHttpClient(context);
-      builder.setClient(new OkClient(client));
       return builder.build();
    }
 
