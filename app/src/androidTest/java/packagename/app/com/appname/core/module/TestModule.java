@@ -4,16 +4,11 @@ import android.content.Context;
 
 import javax.inject.Singleton;
 
-import dagger.Module;
+import dagger.Component;
 import dagger.Provides;
-import packagename.app.com.appname.SplashScreenTest;
 import packagename.app.com.appname.core.BaseApplication;
 
-@Module (
-      includes = {RootModule.class},
-      overrides = true,
-      complete = false,
-      injects = {SplashScreenTest.class})
+@Component (modules = { ApplicationModule.class, WebserviceModule.class })
 public class TestModule {
    private Context context;
    private BaseApplication application;

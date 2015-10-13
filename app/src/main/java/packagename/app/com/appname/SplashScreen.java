@@ -9,27 +9,27 @@ import javax.inject.Inject;
 import packagename.app.com.appname.core.BaseActionBarActivity;
 import packagename.app.com.appname.core.CrashTracker;
 import packagename.app.com.appname.core.Injector;
-import retrofit.RestAdapter;
+import retrofit.Retrofit;
 
 public class SplashScreen extends BaseActionBarActivity {
 
-    @Inject
-    Picasso picasso;
+   @Inject
+   Picasso picasso;
 
-    @Inject
-    RestAdapter restAdapter;
+   @Inject
+   Retrofit restAdapter;
 
-    @Inject
-    CrashTracker crashTracker;
+   @Inject
+   CrashTracker crashTracker;
 
-    @Override
-    protected int getLayoutResourceId() {
-        return R.layout.activity_splash_screen;
-    }
+   @Override
+   protected int getLayoutResourceId() {
+      return R.layout.activity_splash_screen;
+   }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Injector.inject(this);
-    }
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      Injector.getAppComponent().inject(this);
+   }
 }

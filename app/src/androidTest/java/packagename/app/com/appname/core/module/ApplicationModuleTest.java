@@ -12,10 +12,12 @@ public class ApplicationModuleTest extends AndroidTestCase {
    @Override
    protected void setUp() throws Exception {
       super.setUp();
-      applicationModule = new ApplicationModule();
+      applicationModule = new ApplicationModule(
+            (packagename.app.com.appname.core.BaseApplication) getContext()
+                  .getApplicationContext());
    }
 
-   public void testProvideCrashTracker(){
+   public void testProvideCrashTracker() {
       assertThat(applicationModule.provideCrashTracker(
             (packagename.app.com.appname.core.BaseApplication) getContext()
                   .getApplicationContext()), notNullValue());
