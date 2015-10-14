@@ -70,7 +70,7 @@ dependencies {
    compile 'javax.annotation:jsr250-api:1.0'
    compile 'com.android.support:appcompat-v7:23.0.1'
    compile 'com.android.support:design:23.0.1'
-   compile 'net.hockeyapp.android:HockeySDK:3.6.1'
+   compile 'net.hockeyapp.android:HockeySDK:3.6.2'
    compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
    compile 'de.greenrobot:eventbus:2.4.0'

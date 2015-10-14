@@ -3,7 +3,7 @@ BaseAndroidApp
 BaseAndroidApp provides a solid template for android apps, equipped with powerful frameworks out of the box. 
 	
 # Built-in
-- Crash reports via [**HOCKEYAPP**](http://hockeyapp.net/)
+- Crash reports via [**HockeyApp**](http://hockeyapp.net/)
 - Image downloading/caching via [**Picasso**](http://square.github.io/picasso/)
 - Less code via [**Dagger**](http://square.github.io/dagger/) and [**Butterknife**](http://jakewharton.github.io/butterknife/)
 
