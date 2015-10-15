@@ -13,7 +13,7 @@ BaseAndroidApp provides a solid template for android apps, equipped with powerfu
 
 # Dependencies
 - [dagger:1.2.2](http://square.github.io/dagger/)
-- [HockeySDK:3.5.0](https://github.com/bitstadium/HockeySDK-Android)
+- [HockeySDK:3.6.2](https://github.com/bitstadium/HockeySDK-Android)
 - [okhttp:2.4.0](https://github.com/square/okhttp)
 - [com.squareup.retrofit:retrofit:1.9.0](http://square.github.io/retrofit/)
 - [eventbus:2.4.0](https://github.com/greenrobot/EventBus)
