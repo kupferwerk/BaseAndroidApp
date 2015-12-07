@@ -25,14 +25,17 @@ public class WebserviceModule {
 
    public static final int CACHE_SIZE = 25 * 1024 * 1024;
 
-   /* TODO: Add here provides methods for retrofit interfaces. */
+   @Provides
+   @Singleton
+   Cache provideHttpCache(Context context) {
+      final File cacheDirectory = new File(context.getCacheDir()
+            .getAbsolutePath(), "HttpCache");
+      return new Cache(cacheDirectory, CACHE_SIZE);
+   }
 
    @Provides
    @Singleton
-   OkHttpClient provideHttpClient(Context context) {
-      final File cacheDirectory = new File(context.getCacheDir()
-            .getAbsolutePath(), "HttpCache");
-      final Cache cache = new Cache(cacheDirectory, CACHE_SIZE);
+   OkHttpClient provideHttpClient(Context context, Cache cache) {
       final OkHttpClient client = new OkHttpClient();
       client.setCache(cache);
       return client;
