@@ -29,6 +29,17 @@ public class WebserviceModule {
 
    @Provides
    @Singleton
+   OkHttpClient provideHttpClient(Context context) {
+      final File cacheDirectory = new File(context.getCacheDir()
+            .getAbsolutePath(), "HttpCache");
+      final Cache cache = new Cache(cacheDirectory, CACHE_SIZE);
+      final OkHttpClient client = new OkHttpClient();
+      client.setCache(cache);
+      return client;
+   }
+
+   @Provides
+   @Singleton
    Picasso providePicasso(Context context, OkHttpClient client) {
       Picasso.Builder imageLoaderBuilder = new Picasso.Builder(context);
       imageLoaderBuilder.executor(Executors.newSingleThreadExecutor());
@@ -39,25 +50,16 @@ public class WebserviceModule {
 
    @Provides
    @Singleton
-   Retrofit provideRetrofit(Context context) {
+   Retrofit provideRetrofit(Context context, OkHttpClient client) {
       Retrofit.Builder builder =
             new Retrofit.Builder().baseUrl(context.getString(R.string.base_url))
                   .addConverterFactory(GsonConverterFactory.create());
       if (BuildConfig.DEBUG) {
-         OkHttpClient client = new OkHttpClient();
-         client.interceptors().add(new LoggingInterceptor());
+         client.interceptors()
+               .add(new LoggingInterceptor());
       }
+      builder.client(client);
       return builder.build();
-   }
-
-   @Provides
-   @Singleton
-   OkHttpClient getHttpClient(Context context) {
-      final File cacheDirectory = new File(context.getCacheDir().getAbsolutePath(), "HttpCache");
-      final Cache cache = new Cache(cacheDirectory, CACHE_SIZE);
-      final OkHttpClient client = new OkHttpClient();
-      client.setCache(cache);
-      return client;
    }
 }
 
