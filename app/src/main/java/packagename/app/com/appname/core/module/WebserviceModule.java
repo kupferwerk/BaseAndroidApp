@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -28,9 +29,11 @@ public class WebserviceModule {
 
    @Provides
    @Singleton
-   Picasso providePicasso(Context context) {
+   Picasso providePicasso(Context context, OkHttpClient client) {
       Picasso.Builder imageLoaderBuilder = new Picasso.Builder(context);
       imageLoaderBuilder.executor(Executors.newSingleThreadExecutor());
+      imageLoaderBuilder.downloader(new OkHttpDownloader(client));
+      imageLoaderBuilder.indicatorsEnabled(BuildConfig.IS_IDE_BUILD);
       return imageLoaderBuilder.build();
    }
 
@@ -47,7 +50,9 @@ public class WebserviceModule {
       return builder.build();
    }
 
-   private OkHttpClient getHttpClient(Context context) {
+   @Provides
+   @Singleton
+   OkHttpClient getHttpClient(Context context) {
       final File cacheDirectory = new File(context.getCacheDir().getAbsolutePath(), "HttpCache");
       final Cache cache = new Cache(cacheDirectory, CACHE_SIZE);
       final OkHttpClient client = new OkHttpClient();
