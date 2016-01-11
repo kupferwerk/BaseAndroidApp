@@ -7,7 +7,7 @@ import packagename.app.com.appname.core.module.WebserviceModule;
 
 public final class Injector {
 
-   public static AppComponent appComponent;
+   private static AppComponent appComponent;
 
    public static void init(BaseApplication application) {
       appComponent =
