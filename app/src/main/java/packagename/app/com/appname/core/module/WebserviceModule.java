@@ -3,20 +3,22 @@ package packagename.app.com.appname.core.module;
 import android.content.Context;
 
 import com.squareup.okhttp.Cache;
+import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.concurrent.Executors;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import packagename.app.com.appname.BuildConfig;
 import packagename.app.com.appname.R;
-import packagename.app.com.appname.core.logging.LoggingInterceptor;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 
@@ -24,6 +26,7 @@ import retrofit.Retrofit;
 public class WebserviceModule {
 
    public static final int CACHE_SIZE = 25 * 1024 * 1024;
+   private static final String OKHTTP_LOGGING_INTERCEPTOR = "OKHTTP_LOGGING_INTERCEPTOR";
 
    @Provides
    @Singleton
@@ -35,10 +38,27 @@ public class WebserviceModule {
 
    @Provides
    @Singleton
-   OkHttpClient provideHttpClient(Context context, Cache cache) {
+   OkHttpClient provideHttpClient(Cache cache,
+         @Named (OKHTTP_LOGGING_INTERCEPTOR) Interceptor loggingInterceptor) {
       final OkHttpClient client = new OkHttpClient();
       client.setCache(cache);
+      if (loggingInterceptor != null) {
+         client.interceptors()
+               .add(loggingInterceptor);
+      }
       return client;
+   }
+
+   @Provides
+   @Singleton
+   @Named (OKHTTP_LOGGING_INTERCEPTOR)
+   Interceptor provideHttpLoggingInterceptor() {
+      HttpLoggingInterceptor httpLoggingInterceptor = null;
+      if (BuildConfig.DEBUG) {
+         httpLoggingInterceptor = new HttpLoggingInterceptor();
+         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+      }
+      return httpLoggingInterceptor;
    }
 
    @Provides
@@ -57,10 +77,6 @@ public class WebserviceModule {
       Retrofit.Builder builder =
             new Retrofit.Builder().baseUrl(context.getString(R.string.base_url))
                   .addConverterFactory(GsonConverterFactory.create());
-      if (BuildConfig.DEBUG) {
-         client.interceptors()
-               .add(new LoggingInterceptor());
-      }
       builder.client(client);
       return builder.build();
    }
