@@ -1,42 +1,51 @@
 package packagename.app.com.appname.core.module;
 
-import android.test.AndroidTestCase;
+import android.content.Context;
+import android.support.test.InstrumentationRegistry;
 
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
 
+import org.junit.Before;
+import org.junit.Test;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
 
-public class WebserviceModuleTest extends AndroidTestCase {
+public class WebserviceModuleTest {
 
+   private Context context;
    private WebserviceModule webserviceModule;
 
-   public void testProvideHttpCache() {
-      assertThat(webserviceModule.provideHttpCache(getContext()), notNullValue());
+   @Before
+   public void setUp() {
+      context = InstrumentationRegistry.getTargetContext();
+      webserviceModule = new WebserviceModule();
    }
 
+   @Test
+   public void testProvideHttpCache() {
+      assertThat(webserviceModule.provideHttpCache(context), notNullValue());
+   }
+
+   @Test
    public void testProvideHttpClient() {
-      final Cache cache = webserviceModule.provideHttpCache(getContext());
+      final Cache cache = webserviceModule.provideHttpCache(context);
       assertThat(webserviceModule.provideHttpClient(cache, null), notNullValue());
    }
 
+   @Test
    public void testProvideHttpLoggingInterceptor() {
       assertThat(webserviceModule.provideHttpLoggingInterceptor(), notNullValue());
    }
 
+   @Test
    public void testProvidePicasso() {
-      assertThat(webserviceModule.providePicasso(getContext(), new OkHttpClient()), notNullValue());
+      assertThat(webserviceModule.providePicasso(context, new OkHttpClient()), notNullValue());
    }
 
+   @Test
    public void testProvideRestAdapter() {
-      assertThat(webserviceModule.provideRetrofit(getContext(), new OkHttpClient()),
-            notNullValue());
-   }
-
-   @Override
-   protected void setUp() throws Exception {
-      super.setUp();
-      webserviceModule = new WebserviceModule();
+      assertThat(webserviceModule.provideRetrofit(context, new OkHttpClient()), notNullValue());
    }
 }

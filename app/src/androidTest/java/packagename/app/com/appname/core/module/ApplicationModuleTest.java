@@ -1,25 +1,29 @@
 package packagename.app.com.appname.core.module;
 
-import android.test.AndroidTestCase;
+import android.support.test.InstrumentationRegistry;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import packagename.app.com.appname.core.BaseApplication;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
 
-public class ApplicationModuleTest extends AndroidTestCase {
+public class ApplicationModuleTest {
 
+   private BaseApplication application;
    private ApplicationModule applicationModule;
 
-   @Override
-   protected void setUp() throws Exception {
-      super.setUp();
-      applicationModule = new ApplicationModule(
-            (packagename.app.com.appname.core.BaseApplication) getContext()
-                  .getApplicationContext());
+   @Before
+   public void setUp() throws Exception {
+      application = (BaseApplication) InstrumentationRegistry.getTargetContext()
+            .getApplicationContext();
+      applicationModule = new ApplicationModule(application);
    }
 
+   @Test
    public void testProvideCrashTracker() {
-      assertThat(applicationModule.provideCrashTracker(
-            (packagename.app.com.appname.core.BaseApplication) getContext()
-                  .getApplicationContext()), notNullValue());
+      assertThat(applicationModule.provideCrashTracker(application), notNullValue());
    }
 }
