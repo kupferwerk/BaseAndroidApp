@@ -25,14 +25,13 @@ import retrofit.Retrofit;
 @Module
 public class WebserviceModule {
 
-   public static final int CACHE_SIZE = 25 * 1024 * 1024;
+   private static final int CACHE_SIZE = 25 * 1024 * 1024;
    private static final String OKHTTP_LOGGING_INTERCEPTOR = "OKHTTP_LOGGING_INTERCEPTOR";
 
    @Provides
    @Singleton
    Cache provideHttpCache(Context context) {
-      final File cacheDirectory = new File(context.getCacheDir()
-            .getAbsolutePath(), "HttpCache");
+      final File cacheDirectory = new File(context.getCacheDir(), "HttpCache");
       return new Cache(cacheDirectory, CACHE_SIZE);
    }
 

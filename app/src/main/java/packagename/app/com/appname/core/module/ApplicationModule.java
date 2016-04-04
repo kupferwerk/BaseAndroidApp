@@ -12,8 +12,8 @@ import packagename.app.com.appname.core.CrashTracker;
 @Module
 public class ApplicationModule {
 
-   private Context context;
-   private BaseApplication application;
+   private final Context context;
+   private final BaseApplication application;
 
    public ApplicationModule(BaseApplication application) {
       this.application = application;
