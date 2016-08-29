@@ -9,13 +9,14 @@ public final class Injector {
 
    private static AppComponent appComponent;
 
-   public static void init(BaseApplication application) {
-      appComponent =
-            DaggerAppComponent.builder().applicationModule(new ApplicationModule(application))
-                  .webserviceModule(new WebserviceModule()).build();
-   }
-
    public static AppComponent getAppComponent() {
       return appComponent;
+   }
+
+   public static void init(BaseApplication application) {
+      appComponent = DaggerAppComponent.builder()
+            .applicationModule(new ApplicationModule(application))
+            .webserviceModule(new WebserviceModule())
+            .build();
    }
 }
