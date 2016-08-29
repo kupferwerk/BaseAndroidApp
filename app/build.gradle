@@ -8,13 +8,13 @@ android {
       exclude 'LICENSE.txt'
    }
 
-   compileSdkVersion 23
-   buildToolsVersion "23.0.2"
+   compileSdkVersion 24
+   buildToolsVersion "24.0.2"
 
    defaultConfig {
       applicationId "packagename.app.com.appname"
       minSdkVersion 16
-      targetSdkVersion 23
+      targetSdkVersion 24
       testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
       versionCode System.getenv("BUILD_NUMBER") as Integer ?: 0
       String versionNameString = System.getenv("BUILD_NUMBER") ?: "IDE"
@@ -67,24 +67,27 @@ task checkstyleReport(dependsOn: 'checkstyle') << {
 dependencies {
    compile 'com.google.dagger:dagger:2.0.2'
    apt "com.google.dagger:dagger-compiler:2.0.2"
+   apt 'com.jakewharton:butterknife-compiler:8.4.0'
    // Needed for @Generated annotation (missing in Java <= 1.6; therefore, Android)
    compile 'javax.annotation:jsr250-api:1.0'
-   compile 'com.android.support:appcompat-v7:23.1.1'
-   compile 'com.android.support:design:23.1.1'
-   compile 'net.hockeyapp.android:HockeySDK:3.6.2'
-   compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
-   compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
-   compile 'com.squareup.okhttp:logging-interceptor:2.7.2'
+   compile 'com.android.support:appcompat-v7:24.2.0'
+   compile 'com.android.support:design:24.2.0'
+   compile 'com.android.support:support-annotations:24.2.0'
+   compile 'net.hockeyapp.android:HockeySDK:4.0.0'
+   compile 'com.squareup.retrofit2:retrofit:2.1.0'
+   compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+   compile 'com.squareup.okhttp3:okhttp:3.4.1'
+   compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
    compile 'de.greenrobot:eventbus:2.4.0'
    compile 'com.squareup.picasso:picasso:2.5.2'
-   compile 'com.jakewharton:butterknife:7.0.1'
-   compile 'io.reactivex:rxandroid:1.1.0'
-   compile 'io.reactivex:rxjava:1.1.0'
+   compile 'com.jakewharton:butterknife:8.4.0'
+   compile 'io.reactivex:rxandroid:1.2.1'
+   compile 'io.reactivex:rxjava:1.1.6'
    testCompile 'junit:junit:4.12'
    testCompile 'org.mockito:mockito-core:2.0.36-beta'
    testCompile 'org.hamcrest:hamcrest-core:1.3'
    testCompile 'org.hamcrest:hamcrest-library:1.3'
-   androidTestCompile 'com.android.support:support-annotations:23.1.1'
+   androidTestCompile 'com.android.support:support-annotations:24.2.0'
    androidTestCompile 'com.android.support.test:runner:0.4.1'
    androidTestCompile 'com.android.support.test:rules:0.4.1'
    androidTestCompile 'org.mockito:mockito-core:2.0.36-beta'
