@@ -1,7 +1,7 @@
 BaseAndroidApp
 ==============
-BaseAndroidApp provides a solid template for android apps, equipped with powerful frameworks out of the box. 
-	
+BaseAndroidApp provides a solid template for android apps, equipped with powerful frameworks out of the box.
+
 # Built-in
 - Crash reports via [**HockeyApp**](http://hockeyapp.net/)
 - Image downloading/caching via [**Picasso**](http://square.github.io/picasso/)
@@ -12,8 +12,8 @@ BaseAndroidApp provides a solid template for android apps, equipped with powerfu
 - Then, just launch the app
 
 # Dependencies
-- [dagger:1.2.2](http://square.github.io/dagger/)
-- [HockeySDK:3.6.2](https://github.com/bitstadium/HockeySDK-Android)
+- [dagger:2.1](https://github.com/google/dagger)
+- [HockeySDK:4.0.0](https://github.com/bitstadium/HockeySDK-Android)
 - [okhttp:2.4.0](https://github.com/square/okhttp)
 - [com.squareup.retrofit:retrofit:1.9.0](http://square.github.io/retrofit/)
 - [eventbus:2.4.0](https://github.com/greenrobot/EventBus)
@@ -28,4 +28,3 @@ BaseAndroidApp provides a solid template for android apps, equipped with powerfu
 # License
 	Copyright 2015 Kupferwerk
 	Licensed under the Apache License, Version 2.0
-
