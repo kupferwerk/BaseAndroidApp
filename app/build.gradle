@@ -65,8 +65,8 @@ task checkstyleReport(dependsOn: 'checkstyle') << {
 }
 
 dependencies {
-   compile 'com.google.dagger:dagger:2.2'
-   apt "com.google.dagger:dagger-compiler:2.2"
+   compile 'com.google.dagger:dagger:2.6.1'
+   apt "com.google.dagger:dagger-compiler:2.6.1"
    apt 'com.jakewharton:butterknife-compiler:8.4.0'
    // Needed for @Generated annotation (missing in Java <= 1.6; therefore, Android)
    compile 'javax.annotation:jsr250-api:1.0'

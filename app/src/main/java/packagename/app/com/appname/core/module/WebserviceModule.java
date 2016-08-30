@@ -2,7 +2,7 @@ package packagename.app.com.appname.core.module;
 
 import android.content.Context;
 
-import com.squareup.picasso.OkHttpDownloader;
+import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -20,7 +20,9 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import packagename.app.com.appname.BuildConfig;
 import packagename.app.com.appname.R;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.schedulers.Schedulers;
 
 @Module
 public class WebserviceModule {
@@ -43,6 +45,7 @@ public class WebserviceModule {
       if (loggingInterceptor != null) {
          builder.addInterceptor(loggingInterceptor);
       }
+
       builder.cache(cache);
       return builder.build();
    }
@@ -61,13 +64,13 @@ public class WebserviceModule {
 
    @Provides
    @Singleton
-   OkHttpDownloader provideOkHttpDownloader(Context context) {
-      return new OkHttpDownloader(context, CACHE_SIZE);
+   OkHttp3Downloader provideOkHttpDownloader(Context context) {
+      return new OkHttp3Downloader(context, CACHE_SIZE);
    }
 
    @Provides
    @Singleton
-   Picasso providePicasso(Context context, OkHttpDownloader downloader) {
+   Picasso providePicasso(Context context, OkHttp3Downloader downloader) {
       return new Picasso.Builder(context).executor(Executors.newSingleThreadExecutor())
             .downloader(downloader)
             .indicatorsEnabled(BuildConfig.IS_IDE_BUILD)
@@ -79,6 +82,7 @@ public class WebserviceModule {
    Retrofit provideRetrofit(Context context, OkHttpClient client) {
       return new Retrofit.Builder().baseUrl(context.getString(R.string.base_url))
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
             .client(client)
             .build();
    }
