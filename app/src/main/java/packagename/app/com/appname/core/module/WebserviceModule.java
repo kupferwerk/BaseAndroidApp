@@ -2,11 +2,7 @@ package packagename.app.com.appname.core.module;
 
 import android.content.Context;
 
-import com.squareup.okhttp.Cache;
-import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
-import com.squareup.picasso.OkHttpDownloader;
+import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -17,10 +13,16 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.Cache;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import packagename.app.com.appname.BuildConfig;
 import packagename.app.com.appname.R;
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rx.schedulers.Schedulers;
 
 @Module
 public class WebserviceModule {
@@ -39,13 +41,13 @@ public class WebserviceModule {
    @Singleton
    OkHttpClient provideHttpClient(Cache cache,
          @Named (OKHTTP_LOGGING_INTERCEPTOR) Interceptor loggingInterceptor) {
-      final OkHttpClient client = new OkHttpClient();
-      client.setCache(cache);
+      OkHttpClient.Builder builder = new OkHttpClient.Builder();
       if (loggingInterceptor != null) {
-         client.interceptors()
-               .add(loggingInterceptor);
+         builder.addInterceptor(loggingInterceptor);
       }
-      return client;
+
+      builder.cache(cache);
+      return builder.build();
    }
 
    @Provides
@@ -62,22 +64,27 @@ public class WebserviceModule {
 
    @Provides
    @Singleton
-   Picasso providePicasso(Context context, OkHttpClient client) {
-      Picasso.Builder imageLoaderBuilder = new Picasso.Builder(context);
-      imageLoaderBuilder.executor(Executors.newSingleThreadExecutor());
-      imageLoaderBuilder.downloader(new OkHttpDownloader(client));
-      imageLoaderBuilder.indicatorsEnabled(BuildConfig.IS_IDE_BUILD);
-      return imageLoaderBuilder.build();
+   OkHttp3Downloader provideOkHttpDownloader(Context context) {
+      return new OkHttp3Downloader(context, CACHE_SIZE);
+   }
+
+   @Provides
+   @Singleton
+   Picasso providePicasso(Context context, OkHttp3Downloader downloader) {
+      return new Picasso.Builder(context).executor(Executors.newSingleThreadExecutor())
+            .downloader(downloader)
+            .indicatorsEnabled(BuildConfig.IS_IDE_BUILD)
+            .build();
    }
 
    @Provides
    @Singleton
    Retrofit provideRetrofit(Context context, OkHttpClient client) {
-      Retrofit.Builder builder =
-            new Retrofit.Builder().baseUrl(context.getString(R.string.base_url))
-                  .addConverterFactory(GsonConverterFactory.create());
-      builder.client(client);
-      return builder.build();
+      return new Retrofit.Builder().baseUrl(context.getString(R.string.base_url))
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
+            .client(client)
+            .build();
    }
 }
 
