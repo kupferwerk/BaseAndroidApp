@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import packagename.app.com.appname.core.BaseActionBarActivity;
 import packagename.app.com.appname.core.CrashTracker;
 import packagename.app.com.appname.core.Injector;
-import retrofit.Retrofit;
+import retrofit2.Retrofit;
 
 public class SplashScreen extends BaseActionBarActivity {
 

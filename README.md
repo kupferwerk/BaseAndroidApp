@@ -12,7 +12,7 @@ BaseAndroidApp provides a solid template for android apps, equipped with powerfu
 - Then, just launch the app
 
 # Dependencies
-- [dagger:2.1](https://github.com/google/dagger)
+- [dagger:2.6.1](https://github.com/google/dagger)
 - [HockeySDK:4.0.0](https://github.com/bitstadium/HockeySDK-Android)
 - [retrofit2:2.1.0](https://github.com/square/retrofit)
 - [okhttp:3.4.1](https://github.com/square/okhttp)

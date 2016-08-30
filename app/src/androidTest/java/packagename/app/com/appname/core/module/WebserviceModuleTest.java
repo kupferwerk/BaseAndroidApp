@@ -3,11 +3,13 @@ package packagename.app.com.appname.core.module;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 
-import com.squareup.okhttp.Cache;
-import com.squareup.okhttp.OkHttpClient;
+import com.jakewharton.picasso.OkHttp3Downloader;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import okhttp3.Cache;
+import okhttp3.OkHttpClient;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.notNullValue;
@@ -41,7 +43,8 @@ public class WebserviceModuleTest {
 
    @Test
    public void testProvidePicasso() {
-      assertThat(webserviceModule.providePicasso(context, new OkHttpClient()), notNullValue());
+      assertThat(webserviceModule.providePicasso(context, new OkHttp3Downloader(context)),
+            notNullValue());
    }
 
    @Test
