@@ -152,9 +152,6 @@
     <module name="FileLength">
         <property name="max" value="800" />
     </module>
-    <module name="StrictDuplicateCode">
-        <property name="min" value="15" />
-    </module>
     <!--<module name="NewlineAtEndOfFile"/>-->
     <module name="SuppressionCommentFilter" />
     <module name="FileTabCharacter" />
