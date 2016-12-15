@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'checkstyle'
 apply plugin: 'com.neenbedankt.android-apt'
 //apply plugin: 'com.intive.codequality'
 
@@ -40,29 +39,6 @@ android {
       debug {
          applicationIdSuffix ".debug"
          testCoverageEnabled true
-      }
-   }
-}
-
-task checkstyle(type: Checkstyle) {
-   source 'src/'
-   include '**/*.java'
-   exclude '**/gen/**'
-   classpath = files()
-   reports {
-      xml {
-         destination "build/outputs/reports/checkstyle-results.xml"
-      }
-   }
-}
-
-task checkstyleReport(dependsOn: 'checkstyle') {
-   doLast{
-      if (file("build/outputs/reports/checkstyle-results.xml").exists()) {
-         ant.xslt(in: "build/outputs/reports/checkstyle-results.xml",
-               style: "config/checkstyle/checkstyle.xsl",
-               out: "build/outputs/reports/checkstyle-results.html"
-         )
       }
    }
 }
