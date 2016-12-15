@@ -3,6 +3,13 @@ apply plugin: 'com.github.ben-manes.versions'
 
 buildscript {
    repositories {
+      /*maven {
+         url "https://nexus.kupferwerk.net/content/repositories/snapshots/"
+         credentials {
+            username '<<place username here>>'
+            password '<<place username here>>'
+         }
+      }*/
       jcenter()
    }
    dependencies {
@@ -10,6 +17,7 @@ buildscript {
       classpath 'com.github.ben-manes:gradle-versions-plugin:0.11.3'
       // Assists in working with annotation processors for Android Studio.
       classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+      //classpath 'com.intive.codequality:gradle-plugin:1.0.0-SNAPSHOT'
    }
 }
 
